@@ -15,4 +15,4 @@ jobs:
       - name: Install dependencies
         run: pip3 install -r requirements.txt
       - name: Run Pylint
-        run: pylint --load-plugins pylint_django scoreboard
+        run: pylint --load-plugins pylint_django --django-settings-module raichu.settings scoreboard

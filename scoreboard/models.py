@@ -32,4 +32,3 @@ class TeamService(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     status = models.CharField(max_length=100)
     message = models.CharField(max_length=200)
-
