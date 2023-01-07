@@ -1,0 +1,2 @@
+# Raichu-Scoreboard
+cope
