@@ -12,8 +12,8 @@ jobs:
   pylint:
     runs-on: ubuntu-latest
     steps:
-      - name: Cope?
-        run: ls
+      - name: Set up Python
+        uses: actions/setup-python@v2
       - name: Install dependencies
         run: pip3 install -r requirements.txt
       - name: Run Pylint
