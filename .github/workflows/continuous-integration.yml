@@ -10,7 +10,9 @@ on:
     branches: [main]
 jobs:
   pylint:
-    - name: Python Pylin GitHub Action
-      uses: fylein/python-pylint-github-action@v1
-      with:
-        args: pip3 install -r requirements.txt && pylint --load-plugins pylint_django scoreboard
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: pip3 install -r requirements.txt
+      - name: Run Pylint
+        run: pylint --load-plugins pylint_django scoreboard
