@@ -25,10 +25,17 @@ class TeamService(models.Model):
     """Stores data about a specific team's service"""
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
-    status = models.CharField(max_length=100)
-    message = models.CharField(max_length=200)
     ip = models.CharField(max_length=15)
     port = models.IntegerField()
+
+
+class Score(models.Model):
+    """Reflects a single check on a team's service. Entries produced by score bot"""
+    team_service = models.ForeignKey(TeamService, on_delete=models.CASCADE)
+    round = models.IntegerField()
+    timestamp = models.DateTimeField()
+    status = models.CharField(max_length=100)
+    message = models.CharField(max_length=200)
 
 
 class Credential(models.Model):
