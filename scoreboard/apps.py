@@ -1,3 +1,4 @@
+"""Docstring here so Pylint doesn't complain"""
 from django.apps import AppConfig
 
 

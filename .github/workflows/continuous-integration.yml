@@ -1,0 +1,16 @@
+# Based on https://github.com/thecourseforum/theCourseForum2/blob/dev/.github/workflows/continuous-integration.yml
+name: Continuous Integration
+
+on:
+  pull_request:
+    branches:
+      - '*'
+  # The following is needed to run tests upon direct push to main
+  push:
+    branches: [main]
+jobs:
+  pylint:
+    - name: Python Pylin GitHub Action
+      uses: fylein/python-pylint-github-action@v1
+      with:
+        args: pip3 install -r requirements.txt && pylint --load-plugins pylint_django scoreboard
