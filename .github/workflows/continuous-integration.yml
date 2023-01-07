@@ -12,6 +12,7 @@ jobs:
   pylint:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v2
       - name: Install dependencies
