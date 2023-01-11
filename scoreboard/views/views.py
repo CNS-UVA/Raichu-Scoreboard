@@ -1,19 +1,30 @@
 """Docstring here so Pylint doesn't complain"""
 from django.shortcuts import render
 
-from scoreboard.models import *
+from scoreboard.models import Credential, TeamService
 
-# Create your views here.
+
 def index(request):
+    """Index view? idk"""
     return render(request, 'index.html')
 
+# pylint: disable=fixme
 # TODO: redirect if not logged in
 def credentials(request):
-    # request.user.
+    """Shows user's team's submited credentials"""
     data = {
         'credentials': Credential.objects.filter(
             service__team=request.user.team
         )
     }
-    print(len(data['credentials']))
+    return render(request, 'credentials.html', data)
+
+
+def services(request):
+    """Shows user's team's services"""
+    data = {
+        'services': TeamService.objects.filter(
+            team=request.user.team
+        )
+    }
     return render(request, 'credentials.html', data)
