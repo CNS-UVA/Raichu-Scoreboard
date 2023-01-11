@@ -5,7 +5,7 @@ from scoreboard.models import *
 
 # Create your views here.
 def index(request):
-    return render(request, 'scoreboard/index.html')
+    return render(request, 'index.html')
 
 # TODO: redirect if not logged in
 def credentials(request):
@@ -16,4 +16,4 @@ def credentials(request):
         )
     }
     print(len(data['credentials']))
-    return render(request, 'scoreboard/credentials.html', data)
+    return render(request, 'credentials.html', data)
