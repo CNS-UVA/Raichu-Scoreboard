@@ -19,3 +19,5 @@ jobs:
         run: pip3 install -r requirements.txt
       - name: Run Pylint
         run: pylint --load-plugins pylint_django --django-settings-module raichu.settings scoreboard
+      - name: Run Django tests
+        run: python manage.py test
