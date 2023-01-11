@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Service Name</th>
+            <th scope="col">Team Number</th>
+            <th scope="col">Status</th>
+            <th scope="col">Message</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for service in services %}
+            <tr>
+                <td>{{ service.service.name }}</td>
+                <td>{{ service.team.team_id }}</td>
+                <td>{{ service.status }}:{{ credential.service.port }}</td>
+                <td>{{ service.message }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

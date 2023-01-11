@@ -8,6 +8,7 @@ def index(request):
     """Index view? idk"""
     return render(request, 'index.html')
 
+
 # pylint: disable=fixme
 # TODO: redirect if not logged in
 def credentials(request):
@@ -27,4 +28,8 @@ def services(request):
             team=request.user.team
         )
     }
-    return render(request, 'credentials.html', data)
+    return render(request, 'services.html', data)
+
+
+def mickey(request):
+    print('hi')
