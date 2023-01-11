@@ -1,7 +1,7 @@
 """Docstring here so Pylint doesn't complain"""
 from django.shortcuts import render
 
-from scoreboard.models import Credential, TeamService
+from scoreboard.models import Credential, TeamService, Score
 
 
 def index(request):
@@ -30,6 +30,3 @@ def services(request):
     }
     return render(request, 'services.html', data)
 
-
-def mickey(request):
-    print('hi')
