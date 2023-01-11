@@ -10,6 +10,9 @@ class Team(models.Model):
     # Make this separate from primary key so we can independently control it
     team_id = models.IntegerField()
 
+    def __str__(self):
+        return f'{self.name} ({self.team_id})'
+
 
 class User(AbstractUser):
     """User model"""
@@ -21,6 +24,9 @@ class Service(models.Model):
     """Stores information for a given service e.g. FTP, SSH"""
     name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class TeamService(models.Model):
     """Stores data about a specific team's service"""
@@ -28,6 +34,9 @@ class TeamService(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     ip = models.CharField(max_length=15)
     port = models.IntegerField()
+
+    def __str__(self):
+        return f'{self.team} - {self.service}'
 
 
 class Score(models.Model):
