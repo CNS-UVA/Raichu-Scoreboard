@@ -13,7 +13,8 @@ class Team(models.Model):
 
 class User(AbstractUser):
     """User model"""
-    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    # Team allowed to be nullable to allow team-less superuser lol
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, null=True)
 
 
 class Service(models.Model):
