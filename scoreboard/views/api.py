@@ -1,15 +1,20 @@
+# pylint: disable=invalid-name
+# COPE:
+"""Views for the API"""
 from django.http import JsonResponse
-from rest_framework.renderers import JSONRenderer
 
 from scoreboard.models import Credential
 from scoreboard.serializers import CredentialSerializer
 
 
 def mickey(request):
-    # TODO: password protect?
+    """View for reading all Credential objects"""
+    # TODO: password protect? ligma cope
     serializer = CredentialSerializer(Credential.objects.all(), many=True)
     # TODO: investigate why safe needs to be False
     return JsonResponse(serializer.data, safe=False)
 
+
 def TheFunction(request):
+    """View for creating new Score objects"""
     return None

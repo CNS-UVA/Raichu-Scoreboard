@@ -8,10 +8,10 @@ passing=true
 # Autoformat (autopep8) and Pylint
 if $(echo $changing_files | grep -q .py); then
   echo 'Autoformatting...'
-  autopep8 --in-place --jobs=0 --max-line-length=100 --aggressive --aggressive -r tcf_website tcf_core
+  autopep8 --in-place --jobs=0 --max-line-length=100 --aggressive --aggressive -r scoreboard
   git add $changing_files # Re-add files that got autoformatted
   echo 'Linting...'
-  pylint --load-plugins pylint_django --django-settings-module raichu.settings scoreboard
+  pylint --load-plugins pylint_django --django-settings-module raichu.settings scoreboard || { echo 'ERROR: Pylint failed'; passing=false; }
 else
   echo 'No Python files changed, skipping autoformat.'
   echo 'No Python files changed, skipping Pylint.'

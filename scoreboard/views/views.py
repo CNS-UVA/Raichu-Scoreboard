@@ -1,7 +1,7 @@
 """Docstring here so Pylint doesn't complain"""
 from django.shortcuts import render
 
-from scoreboard.models import Credential, TeamService, Score
+from scoreboard.models import Credential, TeamService
 
 
 def index(request):
@@ -9,7 +9,6 @@ def index(request):
     return render(request, 'index.html')
 
 
-# pylint: disable=fixme
 # TODO: redirect if not logged in
 def credentials(request):
     """Shows user's team's submited credentials"""
@@ -29,4 +28,3 @@ def services(request):
         )
     }
     return render(request, 'services.html', data)
-
