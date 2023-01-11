@@ -1,3 +1,4 @@
 [MAIN]
 
 ignore=migrations
+disable=fixme
