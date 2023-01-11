@@ -1,5 +1,10 @@
 # Raichu-Scoreboard
 
+## Setup
+Run the following command to set up Git hooks:
+```sh
+git config --local core.hooksPath .githooks/
+```
 ## To discuss
 - User creation flow: should `Team`s be created before any `User` objects, or should the `User` creation flow be allowed to create `Team`s?
 - Rename `Credential.service` to `Credential.team_service`? Technically it's a `TeamService` object, but I'm not sure if the extra clarification is necessary.

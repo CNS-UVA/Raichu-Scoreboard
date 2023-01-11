@@ -1,0 +1,34 @@
+#!/bin/sh
+# Adapted from my work on https://github.com/thecourseforum/theCourseForum2/blob/dev/.githooks/pre-commit
+
+# List of files staged for commit
+changing_files=`git diff --cached --name-status | awk '$1 != "D" { print $2 }'`
+passing=true
+
+# Autoformat (autopep8) and Pylint
+if `echo $changing_files | grep -q .py` ; then
+    echo 'Autoformatting...'
+    autopep8 --in-place --jobs=0 --max-line-length=100 --aggressive --aggressive -r tcf_website tcf_core
+    git add $changing_files # Re-add files that got autoformatted
+    echo 'Linting...'
+    pylint --load-plugins pylint_django --django-settings-module raichu.settings scoreboard
+else
+    echo 'No Python files changed, skipping autoformat.'
+    echo 'No Python files changed, skipping Pylint.'
+fi
+
+# Django tests
+if `echo $changing_files | grep -q .py` ; then
+    echo 'Running tests...'
+    python manage.py test --keepdb || { echo 'ERROR: Django tests failed'; passing=false; }
+else
+    echo 'No Python files changed, skipping Django tests.'
+fi
+
+# Only commits if none of the checks failed, otherwise exits without committing
+if [ "$passing" = true ] ; then
+    echo 'Success!'
+else
+    echo 'One or more checks failed. Please fix and try committing again.'
+    exit 1
+fi
