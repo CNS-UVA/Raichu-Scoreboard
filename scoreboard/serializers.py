@@ -6,36 +6,49 @@ from rest_framework.exceptions import ValidationError
 from .models import Score, Credential
 
 
-# I don't know if this actually does anything?
+class CredentialSerializer(serializers.ModelSerializer):
+    """Serializes Credential objects"""
+
+    class Meta:
+        model = Credential
+        fields = '__all__'
+        list_serializer_class = serializers.ListSerializer
+
+
 class BulkCreateListSerializer(serializers.ListSerializer):
-    """Exists to override list create to use bulk_create for performance"""
-    # This is here so the IDE doesn't complain; might not be needed
+    """Overrides ScoreSerializer list create to use more efficient bulk_create"""
 
     def update(self, instance, validated_data):
+        # We don't need to use update, but the IDE complains if it's not here
         pass
 
     def create(self, validated_data):
-        result = [self.child.create(attrs) for attrs in validated_data]
+        # Note: self.child is always ScoreSerializer. This uses ScoreSerializer to
+        # create individual Score objects, then uses bulk_create to put them into
+        # the database with only 1 SQL call.
+        new_scores = [self.child.create(attrs) for attrs in validated_data]
 
         try:
-            self.child.Meta.model.objects.bulk_create(result)
+            self.child.Meta.model.objects.bulk_create(new_scores)
         except IntegrityError as error:
             raise ValidationError(error) from error
 
-        return result
+        return new_scores
 
 
 class ScoreSerializer(serializers.ModelSerializer):
     """Serializes Score objects"""
+
+    def create(self, validated_data):
+        instance = Score(**validated_data)
+
+        # If creating multiple, don't save here so we can bulk create later
+        if isinstance(self._kwargs["data"], dict):
+            instance.save()
+
+        return instance
+
     class Meta:
         model = Score
-        fields = '__all__'
-        list_serializer_class = BulkCreateListSerializer
-
-
-class CredentialSerializer(serializers.ModelSerializer):
-    """Serializes Credential objects"""
-    class Meta:
-        model = Credential
         fields = '__all__'
         list_serializer_class = BulkCreateListSerializer
