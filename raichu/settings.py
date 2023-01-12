@@ -36,8 +36,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'scoreboard',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken'
 ]
+
+# This stuff is needed for token auth to work
+REST_FRAMEWORK = {
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework.authentication.TokenAuthentication',
+   )
+}
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
