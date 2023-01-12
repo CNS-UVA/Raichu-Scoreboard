@@ -12,9 +12,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('credentials', views.credentials, name='credentials'),
     path('services', views.services, name='services'),
-    # path('mickey', views.mickey, name='mickey'),
-    # path('api/credentials', views.CredentialViewSet.as_view(), name='credentials_api'),
-    # path('api/scores', views.TheFunction, name='scores_api')
     path('api/', include(router.urls)),
     path('api/get-token', drf_views.obtain_auth_token)
 ]

@@ -42,9 +42,10 @@ INSTALLED_APPS = [
 
 # This stuff is needed for token auth to work
 REST_FRAMEWORK = {
-   'DEFAULT_AUTHENTICATION_CLASSES': (
-       'rest_framework.authentication.TokenAuthentication',
-   )
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    )
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
