@@ -7,7 +7,7 @@ class Team(models.Model):
     """Team model. Does not actually store member Users"""
     name = models.CharField(max_length=100)
 
-    # Make this separate from primary key so we can independently control it
+    # Make this separate from primary key, so we can independently control it
     team_id = models.IntegerField()
 
     def __str__(self):
