@@ -4,6 +4,7 @@ from rest_framework import routers
 from rest_framework.authtoken import views as drf_views
 from . import views
 
+# API URLs
 router = routers.DefaultRouter()
 router.register(r'credentials', views.CredentialViewSet)
 router.register(r'scores', views.ScoreViewSet)
