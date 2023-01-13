@@ -8,6 +8,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register(r'credentials', views.CredentialViewSet)
 router.register(r'scores', views.ScoreViewSet)
+router.register(r'team_services', views.TeamServiceViewSet)
 
 urlpatterns = [
     path('', views.index, name='index'),
