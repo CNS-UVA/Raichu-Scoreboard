@@ -2,16 +2,25 @@
 # pylint: disable=too-many-ancestors
 # ViewSets have "too many ancestors", but cope
 
-from rest_framework import viewsets, mixins, status
+from rest_framework import mixins, status
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from scoreboard.models import Credential, Score
-from scoreboard.serializers import CredentialSerializer, ScoreSerializer
+from scoreboard.models import Credential, Score, TeamService
+from scoreboard.serializers import CredentialSerializer, ScoreSerializer, TeamServiceSerializer
 
 
-class CredentialViewSet(viewsets.ModelViewSet):
+class TeamServiceViewSet(mixins.ListModelMixin,
+                         GenericViewSet):
+    """Handles views for api/credentials URL"""
+    queryset = TeamService.objects.all()
+    serializer_class = TeamServiceSerializer
+    permission_classes = [IsAdminUser]
+
+
+class CredentialViewSet(mixins.ListModelMixin,
+                        GenericViewSet):
     """Handles views for api/credentials URL"""
     queryset = Credential.objects.all()
     serializer_class = CredentialSerializer
@@ -19,7 +28,7 @@ class CredentialViewSet(viewsets.ModelViewSet):
 
 
 class ScoreViewSet(mixins.CreateModelMixin,
-                   mixins.ListModelMixin,
+                   mixins.ListModelMixin,  # Technically shouldn't support GET but eh
                    GenericViewSet):
     """Handles views for api/scores URL"""
 

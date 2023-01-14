@@ -1,13 +1,16 @@
 # Raichu-Scoreboard
 
 ## Setup
-Run the following command to set up Git hooks:
+Run the following command to set up Git pre-commit hook:
 ```sh
 git config --local core.hooksPath .githooks/
 ```
-
+ 
 ## API Usage
 
+To work with the score bot, Raichu has two API endpoints: `/api/credentials` and `/api/scores`. Both endpoints require passing an authorization header in the format `Authorization: Token {TOKEN}`, where `{TOKEN}` can be retrieved by POSTing an account's username and password to `/api/get-token`. 
+
+The credentials endpoint supports GET requests to retrieve a list of serialized JSON objects representing every `Credential` instance. Similarly, the score endpoint supports POST requests to create `Score` instances by deserializing JSON data.
 ## To discuss
 - User creation flow: should `Team`s be created before any `User` objects, or should the `User` creation flow be allowed to create `Team`s?
 - Rename `Credential.service` to `Credential.team_service`? Technically it's a `TeamService` object, but I'm not sure if the extra clarification is necessary.
