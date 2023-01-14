@@ -5,7 +5,7 @@ Run the following command to set up Git pre-commit hook:
 ```sh
 git config --local core.hooksPath .githooks/
 ```
-
+ 
 ## API Usage
 
 To work with the score bot, Raichu has two API endpoints: `/api/credentials` and `/api/scores`. Both endpoints require passing an authorization header in the format `Authorization: Token {TOKEN}`, where `{TOKEN}` can be retrieved by POSTing an account's username and password to `/api/get-token`. 
