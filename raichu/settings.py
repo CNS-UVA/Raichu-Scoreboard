@@ -50,7 +50,7 @@ REST_FRAMEWORK = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-AUTH_USER_MODEL = 'scoreboard.User'
+AUTH_USER_MODEL = 'scoreboard.Team'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

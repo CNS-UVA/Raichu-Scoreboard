@@ -7,15 +7,24 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from scoreboard.models import Credential, Score, TeamService
-from scoreboard.serializers import CredentialSerializer, ScoreSerializer, TeamServiceSerializer
+from scoreboard.models import Credential, Score, Service, Team
+from scoreboard.serializers import (CredentialSerializer, ScoreSerializer,
+                                    ServiceSerializer, TeamSerializer)
 
 
-class TeamServiceViewSet(mixins.ListModelMixin,
-                         GenericViewSet):
+class ServiceViewSet(mixins.ListModelMixin,
+                     GenericViewSet):
     """Handles views for api/credentials URL"""
-    queryset = TeamService.objects.all()
-    serializer_class = TeamServiceSerializer
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+    permission_classes = [IsAdminUser]
+
+
+class TeamViewSet(mixins.ListModelMixin,
+                  GenericViewSet):
+    """Handles views for api/credentials URL"""
+    queryset = Team.objects.all()
+    serializer_class = TeamSerializer
     permission_classes = [IsAdminUser]
 
 

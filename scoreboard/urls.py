@@ -8,13 +8,12 @@ from . import views
 router = routers.DefaultRouter()
 router.register(r'credentials', views.CredentialViewSet)
 router.register(r'scores', views.ScoreViewSet)
-router.register(r'team_services', views.TeamServiceViewSet)
+router.register(r'services', views.ServiceViewSet)
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('credentials', views.credentials, name='credentials'),
     path('services', views.services, name='services'),
-    path('api/', include(router.urls)),
+    path('api', include(router.urls)),
     path('api/get-token', drf_views.obtain_auth_token)
 ]
 

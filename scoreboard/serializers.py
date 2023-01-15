@@ -3,13 +3,12 @@ from django.db import IntegrityError
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from scoreboard.models import Score, Credential, TeamService, Service
+from scoreboard.models import Score, Credential, Service, Team
 
 
 class ServiceSerializer(serializers.ModelSerializer):
     """
     Serializes Service objects.
-    Needed to include service data when fetching from the TeamService endpoint.
     """
 
     class Meta:
@@ -18,13 +17,13 @@ class ServiceSerializer(serializers.ModelSerializer):
         list_serializer_class = serializers.ListSerializer
 
 
-class TeamServiceSerializer(serializers.ModelSerializer):
-    """Serializes TeamService objects."""
-
-    service = ServiceSerializer()
+class TeamSerializer(serializers.ModelSerializer):
+    """
+    Serializes Service objects.
+    """
 
     class Meta:
-        model = TeamService
+        model = Team
         fields = '__all__'
         list_serializer_class = serializers.ListSerializer
 

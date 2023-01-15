@@ -12,7 +12,12 @@ To work with the score bot, Raichu has two API endpoints: `/api/credentials` and
 
 The credentials endpoint supports GET requests to retrieve a list of serialized JSON objects representing every `Credential` instance. Similarly, the score endpoint supports POST requests to create `Score` instances by deserializing JSON data.
 ## To discuss
+
 - User creation flow: should `Team`s be created before any `User` objects, or should the `User` creation flow be allowed to create `Team`s?
+  - Admin will pre-create `Team` objects and send out credentials
 - Rename `Credential.service` to `Credential.team_service`? Technically it's a `TeamService` object, but I'm not sure if the extra clarification is necessary.
-- Should it be possible to have multiple `Credential`s with the same `TeamService`? Maybe if they change credentials or something...but maybe this should just edit the original object? We can handle this programmatically so maybe we don't need to do anything with the DB schema.
+  - Solved by completely removing the `TeamService` model ez
+- Should it be possible to have multiple `Credential`s with the same `TeamService`? Maybe if they change credentials or something...but maybe this should just edit the original object? We can handle this programmatically, so maybe we don't need to do anything with the DB schema.
+  - "For now, no." -Chase
 - The old scoreboard had an endpoint `/services` that seems to just display each team's status and its current status. However, our schema stores the status of services at a given point in time as `Score` objects. Should `/services` show `Score`s?
+  - "Just ligma cope that" -Chase
