@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'scoreboard',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
 ]
 
 # This stuff is needed for token auth to work
@@ -51,7 +53,7 @@ REST_FRAMEWORK = {
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 AUTH_USER_MODEL = 'scoreboard.Team'
-LOGIN_URL ='/login'
+LOGIN_URL = '/login'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -82,6 +84,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'raichu.wsgi.application'
+ASGI_APPLICATION = 'raichu.asgi.application'
+# Needed for async/websocket stuff
+# TODO: investigate using Redis for this for better performance
+# https://channels.readthedocs.io/en/stable/tutorial/part_2.html
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases

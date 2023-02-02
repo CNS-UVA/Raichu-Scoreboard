@@ -8,10 +8,16 @@ from django.contrib.auth.decorators import login_required
 from scoreboard.models import Service
 
 
-def index(request):
+async def index(request):
     """Index view? idk"""
+    from scoreboard.consumers import DashboardConsumer
+    from channels.layers import get_channel_layer
+    cl = get_channel_layer()
+    await cl.group_send('chat_lobby', {"type": "chat_message", "message": 'ligma cope'})
     return render(request, 'index.html')
 
+def room(request, room_name):
+    return render(request, "room.html", {"room_name": room_name})
 
 def login_view(request):
     """Handles both the login page and login logic"""
@@ -34,7 +40,7 @@ def login_view(request):
             if user.is_active:
                 login(request, user)
                 if redirect_url == "":
-                    return redirect('/services')  # Default "landing page"
+                    return redirect('/')  # Default "landing page"
                 return redirect(redirect_url)
             # FIXME: do we need this?
             state = "Your account is not active, please contact the site admin."

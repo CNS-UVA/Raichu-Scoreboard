@@ -15,7 +15,9 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('services/', views.services, name='services'),
     path('api/', include(router.urls)),
-    path('api/get-token/', drf_views.obtain_auth_token)
+    path('api/get-token/', drf_views.obtain_auth_token),
+
+    path("chat/<str:room_name>/", views.room, name="room"),
 ]
 
 urlpatterns += router.urls

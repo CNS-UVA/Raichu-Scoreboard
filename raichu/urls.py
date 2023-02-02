@@ -18,7 +18,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('scoreboard.urls')),
-    # TODO: remove before deployment, doesn't work anyways rn lol
-    path('test-api/', include('rest_framework.urls'))
+    path('', include('scoreboard.urls'))
 ]

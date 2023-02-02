@@ -9,7 +9,10 @@
             <th scope="col">Service</th>
             <th scope="col">Host</th>
             <th scope="col">Port</th>
+            <th scope="col">Status</th>
             <th scope="col">Message</th>
+            <th scope="col">Username</th>
+            <th scope="col">Password</th>
         </tr>
         </thead>
         <tbody>
@@ -18,6 +21,9 @@
                 <td>{{ service.name }}</td>
                 <td>{{ service.ip }}</td>
                 <td>{{ service.port }}</td>
+                <td>{{ service.message }}</td>
+                <td>{{ service.message }}</td>
+                <td>{{ service.message }}</td>
                 <td>{{ service.message }}</td>
             </tr>
         {% endfor %}
