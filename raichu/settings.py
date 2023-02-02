@@ -51,6 +51,7 @@ REST_FRAMEWORK = {
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 AUTH_USER_MODEL = 'scoreboard.Team'
+LOGIN_URL ='/login'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

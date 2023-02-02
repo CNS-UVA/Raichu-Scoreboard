@@ -1,6 +1,7 @@
 """Docstring here so Pylint doesn't complain"""
+from django.contrib.auth import authenticate, login
 from django.db.models.functions import Concat
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import F, Value
 from django.contrib.auth.decorators import login_required
 
@@ -12,10 +13,45 @@ def index(request):
     return render(request, 'index.html')
 
 
+def login_view(request):
+    """Handles both the login page and login logic"""
+    # Taken from
+    # https://stackoverflow.com/questions/16750464/django-redirect-after-login-not-working-next-not-posting
+    state = "Please log in below..."
+    username = password = ''
+
+    redirect_url = ""
+
+    if request.GET:
+        redirect_url = request.GET['redirect_url']
+
+    if request.POST:
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                if redirect_url == "":
+                    return redirect('/services')  # Default "landing page"
+                return redirect(redirect_url)
+            # FIXME: do we need this?
+            state = "Your account is not active, please contact the site admin."
+        else:
+            state = "Your username and/or password were incorrect."
+
+    return render(request, 'login.html', {
+        'state': state,
+        'username': username,
+        'redirect_url': redirect_url,
+    })
+
+
 @login_required()
 def services(request):
     """Shows user's team's services and credentials"""
-    services_data = Service.objects.all()  # Every team should have one of every service
+    services_data = Service.objects.values()  # Every team should have one of every service
     # scores = Score.objects.filter(team=request.user)
 
     # Note: we can't just use Credential objects because not every Service has a Credential

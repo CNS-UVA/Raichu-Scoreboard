@@ -12,9 +12,10 @@ router.register(r'services', views.ServiceViewSet)
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('services', views.services, name='services'),
-    path('api', include(router.urls)),
-    path('api/get-token', drf_views.obtain_auth_token)
+    path('login/', views.login_view, name='login'),
+    path('services/', views.services, name='services'),
+    path('api/', include(router.urls)),
+    path('api/get-token/', drf_views.obtain_auth_token)
 ]
 
 urlpatterns += router.urls
